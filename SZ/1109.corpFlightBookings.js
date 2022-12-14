@@ -8,6 +8,7 @@
 //  * @param {number} n
 //  * @return {number[]}
 //  */
+//差分数组
 var corpFlightBookings = function(bookings, n) {
     let diff=[],answer=[];
     diff=new Array(n).fill(0);
