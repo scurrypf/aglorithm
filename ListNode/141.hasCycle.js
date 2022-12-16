@@ -26,6 +26,7 @@ var hasCycle = function(head) {
 const head = new ListNode([3,2,0,-4]);
 console.log(hasCycle(head));
 console.log(head);
+
 function ListNode(val) {
     this.val = val; 
     this.next = null;
