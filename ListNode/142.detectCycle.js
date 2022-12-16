@@ -13,12 +13,15 @@ function ListNode(val) {
 //  * @param {ListNode} head
 //  * @return {ListNode}
 //  */
+//思路：如果有环，则在fast追上slow是必然为2*slow,设slow走k步，则fast走2k步
+//然后设环起点距slow距离为m，而环长又为fast-slow为k，而k-m正好为slow走环一圈到达起点
+//这时，从head到达环起点也为k-m，所以另fast=head，然后一起向前，再相遇点即为环起点
 var detectCycle = function(head) {
     let slow = head,fast = head;
     while(fast!==null && fast.next!==null){
         slow=slow.next;
         fast=fast.next.next;
-        if(fast===slow){
+        if(fast===slow){//判断是否有环
             fast=head;
             while(fast!==slow){
                 fast=fast.next;
