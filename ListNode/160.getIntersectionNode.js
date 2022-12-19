@@ -15,8 +15,11 @@ function ListNode(val) {
 //  * @param {ListNode} headB
 //  * @return {ListNode}
 //  */
+//思路，当一个链表遍历完时，继续遍历另一个链表，
+//如果有相交节点，则当遍历两个链表的指针将会同时指向该节点
+//如果没有，则会两个指针一起遍历完两个链表，从而两指针相同，同时指向null。
 var getIntersectionNode = function(headA, headB) {
-    let l1=headA,l2=headB;
+    let l1 = headA,l2 = headB;
     while(l1!==l2){
         if(l1===null){
             l1=headB;
@@ -26,7 +29,7 @@ var getIntersectionNode = function(headA, headB) {
         if(l2===null){
             l2=headA;
         }else{
-        l2=l2.next;
+            l2=l2.next;
         }
     }
     return l1;
