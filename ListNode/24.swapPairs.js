@@ -13,6 +13,17 @@
  * @return {ListNode}
  */
 var swapPairs = function(head) {
+    let dummy = new ListNode(-1);
+    dummy.next=head;
+    let l=dummy;
+    while(l.next!==null && l.next.next!==null){
+        let l1 = l.next,l2 = l.next.next;
+        l1.next=l2.next;
+        l.next=l2;
+        l2.next=l1;
+        l=l1;
+    }
+    return dummy.next;
 }
 
 
