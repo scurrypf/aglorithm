@@ -13,6 +13,35 @@
  * @return {ListNode}
  */
 var mergeKLists = function(lists) {
+    if(lists.length===0){
+        return null;
+    }
+    let dummy = new ListNode(-10000);
+    dummy.next=lists[0];
+    let l=dummy;
+    for(let i=1;i<lists.length;i++){
+        let ll=l;
+        l=merge(lists[i],ll);
+    }
+    return dummy.next;
+}
+function merge(l1,l2){
+    let dummy = new ListNode(-10000);
+    dummy.next=lists[0];
+    let l=dummy;
+    while(l1!==null && l2!==null){
+        if(l2.val<l1.val){
+            l.next=l2;
+            l2=l2.next;
+        }else{
+            l.next=l1;
+            l1=l1.next;
+        }
+        l=l.next;
+    }
+    if(l1!==null)l.next=l1;
+    if(l2!==null)l.next=l2;
+    return dummy.next;
 }
 
 
