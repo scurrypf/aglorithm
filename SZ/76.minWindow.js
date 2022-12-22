@@ -9,9 +9,51 @@
  * @return {string}
  */
 var minWindow = function(s, t) {
+    let left = 0,right = 0,num = 0,start = 0,len = Infinity;
+    let need = new Map(),window = new Map();
+    for(let i=0 ; i<t.length ; i++){
+        if(need.has(t.charAt(i))){
+            need.set(t.charAt(i),need.get(t.charAt(i))+1);
+        }else{
+            need.set(t.charAt(i),1);
+        }
+    }
+    while(right<s.length){
+        let c = s.charAt(right);
+        right++;
+        if(need.has(c)){
+            if(window.has(c)){
+                window.set(c,window.get(c)+1);
+            }else{
+                window.set(c,1);
+            }
+            if(window.get(c)===need.get(c)){
+                num++;
+            }
+        }
+        while(num===need.size){
+            if(right-left<len){
+                len=right-left;
+                start=left;
+            }
+            let d = s.charAt(left);
+            left++;
+            if(need.has(d)){
+                if(window.get(d)===need.get(d)){
+                    num--;
+                }
+                window.set(d,window.get(d)-1);
+            }
+        }
+    }
+    if(len===Infinity){
+        return "";
+    }else{
+        return s.slice(start,start+len);
+    }
 }
 
-const s = "ADOBECODEBANC", t = "ABC";
+const s = "aa", t = "aa";
 console.log(minWindow(s,t));
 
 // 输入：s = "ADOBECODEBANC", t = "ABC"
