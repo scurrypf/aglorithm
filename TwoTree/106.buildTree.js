@@ -7,6 +7,23 @@
  * @return {TreeNode}
  */
 var buildTree = function(inorder, postorder) {
+    let map = new Map();
+    for(let i = 0;i<inorder.length;i++){
+        map.set(inorder[i],i)
+    }
+    const build = function(inorder,inStart,inEnd,postorder,postStart,postEnd){
+        if(inStart > inEnd) return null;
+        let rootVal = postorder[postEnd];
+        let index = map.get(rootVal);
+        let leftSize = index - inStart;
+        let root = new TreeNode(rootVal);
+        root.left = build(inorder,inStart,index - 1,
+                        postorder,postStart,postStart + leftSize - 1);
+        root.right = build(inorder,index + 1,inEnd,
+                        postorder,postStart + leftSize,postEnd - 1);
+        return root;
+    }
+    return build(inorder,0,inorder.length - 1,postorder,0,postorder.length - 1);
 }
 
 // 输入：inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
