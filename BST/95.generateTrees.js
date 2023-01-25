@@ -6,6 +6,31 @@
  * @return {TreeNode[]}
  */
 var generateTrees = function(n) {
+    //n = 0时,返回空数组
+    if(n === 0)return[];
+    const buidTree = function(start,end){
+        //每轮返回一个新的res数组
+        let res = []
+        if(start > end){
+            res.push(null);
+            return res;
+        }
+        for(let i = start ; i <= end ; i++){
+            let leftTree = buidTree(start,i - 1);
+            let rightTree = buidTree(i + 1,end);
+            //通过双重for循环来生成BST
+            for(let left of leftTree){
+                for(let right of rightTree){
+                    let root = new TreeNode(i);
+                    root.left = left;
+                    root.right = right;
+                    res.push(root);
+                }
+            }
+        }
+        return res;
+    }
+    return buidTree(1,n);
 }
 
 // 输入：n = 3
