@@ -6,6 +6,20 @@
  * @return {number}
  */
 var numTrees = function(n) {
+    let msg = new Array(n + 1).fill(0).map(()=>new Array(n+1).fill(0))
+    const sum = function(start,end){
+        let res = 0;
+        if(start > end)return 1;
+        if(msg[start][end] !== 0)return msg[start][end];
+        for(let i = start ; i <= end ; i++){
+            let left = sum(start,i - 1);
+            let right = sum(i + 1,end);
+            res += left * right;
+        }
+        msg[start][end] = res;
+        return res;
+    }
+    return sum(1,n);
 }
 
 // 输入：n = 3
