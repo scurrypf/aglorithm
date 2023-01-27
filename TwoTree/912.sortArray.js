@@ -6,16 +6,16 @@
  */
 var sortArray = function(nums) {
     //冒泡排序
-    for(let i = 0;i<nums.length;i++){
-        for(let j = i;j<nums.length;j++){
-            if(nums[j] < nums[i]){
-                let t =nums[j];
-                nums[j] = nums[i];
-                nums[i] = t;
-            }
-        }
-    }
-    return nums;
+    // for(let i = 0;i<nums.length;i++){
+    //     for(let j = i;j<nums.length;j++){
+    //         if(nums[j] < nums[i]){
+    //             let t =nums[j];
+    //             nums[j] = nums[i];
+    //             nums[i] = t;
+    //         }
+    //     }
+    // }
+    // return nums;
     //归并排序
     // let temp = new Array(nums.length);
     // const sort = function(nums,start,end){
@@ -44,6 +44,50 @@ var sortArray = function(nums) {
     // }
     // sort(nums,0,nums.length - 1);
     // return nums;
+    //快速排序
+    //交换两个数
+    const swap = (nums,i,j)=>{
+        let temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    //洗牌算法，用于将数组随机打乱
+    const shuttle = (nums)=>{
+        let n = nums.length;
+        for(let i = 0 ; i < n ; i++){
+            let r = i + Math.floor(Math.random()*(n - i));
+            swap(nums,i,r);
+        }
+    }
+    //切分，将一个数放在其在这个数组中正确的位置(左边的都比他小，右边的都比他大)
+    const part = (nums,start,end)=>{
+        let p = nums[start];
+        let i = start + 1;
+        let j = end;
+        while(i <= j){
+            while(i < end && nums[i] <= p){
+                i++;
+            }
+            while(j > start && nums[j] > p){
+                j--;
+            }
+            if(i >= j){
+                break;
+            }
+            swap(nums,i,j);
+        }
+        swap(nums,start,j);
+        return j;
+    }
+    const sort = (nums,start,end)=>{
+        if(start > end)return;
+        let i = part(nums,start,end);
+        sort(nums,start,i - 1);
+        sort(nums,i + 1,end);
+    }
+    shuttle(nums);
+    sort(nums,0,nums.length - 1);
+    return nums
 }
 
 const nums = [5,2,3,1];
