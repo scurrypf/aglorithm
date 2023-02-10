@@ -30,7 +30,7 @@ var combinationSum2 = function(candidates, target) {
     return res;
 }
 
-const candidates = [10,1,2,7,6,1,5], target = 8;
+const candidates = [2,5,2,1,2], target = 5;
 console.log(combinationSum2(candidates,target))
 
 // 输入: candidates = [10,1,2,7,6,1,5], target = 8,
