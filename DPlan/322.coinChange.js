@@ -8,7 +8,22 @@
  * @return {number}
  */
 var coinChange = function(coins, amount) {
-
+    // 暴力解法
+    const findMin = function(coins,amount){
+        if(amount === 0)return 0;
+        if(amount < 0)return -1;
+        let res = Infinity;
+        for(let coin of coins){
+            let sub = findMin(coins,amount - coin);
+            if(sub === -1)continue;
+            res = Math.min(res,sub + 1);
+        }
+        if(res === Infinity){
+            return -1;
+        }
+        return res;
+    }
+    return findMin(coins,amount);
 }
 
 const coins = [1, 2, 5], amount = 11;
