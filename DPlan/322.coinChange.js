@@ -9,21 +9,52 @@
  */
 var coinChange = function(coins, amount) {
     // 暴力解法
-    const findMin = function(coins,amount){
-        if(amount === 0)return 0;
-        if(amount < 0)return -1;
-        let res = Infinity;
+    // const findMin = function(coins,amount){
+    //     if(amount === 0)return 0;
+    //     if(amount < 0)return -1;
+    //     let res = Infinity;
+    //     for(let coin of coins){
+    //         let sub = findMin(coins,amount - coin);
+    //         if(sub === -1)continue;
+    //         res = Math.min(res,sub + 1);
+    //     }
+    //     if(res === Infinity){
+    //         return -1;
+    //     }
+    //     return res;
+    // }
+    // return findMin(coins,amount);
+    // dp数组备忘录
+    // const findMin = function(coins,amount){
+    //     if(amount === 0)return 0;
+    //     if(amount < 0)return -1;
+    //     if(dp[amount] !== -666)return dp[amount];
+    //     let res = Infinity;
+    //     for(let coin of coins){
+    //         let sub = findMin(coins,amount - coin);
+    //         if(sub === -1)continue;
+    //         res = Math.min(res,sub + 1);
+    //     }
+    //     if(res === Infinity){
+    //         dp[amount] = -1;
+    //     }else{
+    //         dp[amount] = res;
+    //     }
+    //     return dp[amount];
+    // }
+    // let dp = new Array(amount + 1).fill(-666);
+    // return findMin(coins,amount);
+    // 迭代
+    let dp = new Array(amount + 1).fill(amount + 1);
+    dp[0] = 0;
+    for(let i = 1 ; i <= amount ; i++){
         for(let coin of coins){
-            let sub = findMin(coins,amount - coin);
-            if(sub === -1)continue;
-            res = Math.min(res,sub + 1);
+            if(i - coin < 0)continue;
+            dp[i] = Math.min(dp[i],dp[i - coin] + 1);
         }
-        if(res === Infinity){
-            return -1;
-        }
-        return res;
     }
-    return findMin(coins,amount);
+    if(dp[amount] === amount + 1)return -1;
+    return dp[amount];
 }
 
 const coins = [1, 2, 5], amount = 11;
