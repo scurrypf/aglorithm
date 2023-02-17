@@ -8,18 +8,34 @@
  * @return {number}
  */
 var minFallingPathSum = function(matrix) {
+    // 从下开始
+    // let n = matrix.length;
+    // let dp = new Array(n + 1).fill(0).map(()=>new Array(n + 1).fill(666666))
+    // const findMin = function(matrix,i,j){
+    //     if(i < 0 || j < 0 || j >= n)return Infinity;
+    //     if(i == 0)return matrix[i][j];
+    //     if(dp[i][j] !== 666666)return dp[i][j];
+    //     dp[i][j] = matrix[i][j] + Math.min(findMin(matrix,i - 1,j - 1),Math.min(findMin(matrix,i - 1,j),findMin(matrix,i - 1,j + 1)))
+    //     return dp[i][j];
+    // }
+    // let res = 9999999;
+    // for(let i = 0 ; i < n ; i++){
+    //     res = Math.min(res,findMin(matrix,n - 1,i))
+    // }
+    // return res;
+    // 从上开始
     let n = matrix.length;
     let dp = new Array(n + 1).fill(0).map(()=>new Array(n + 1).fill(666666))
     const findMin = function(matrix,i,j){
-        if(i < 0 || j < 0 || j >= n)return Infinity;
-        if(i == 0)return matrix[i][j];
-        if(dp[i][j] !== 666666)return dp[i][j];
-        dp[i][j] = matrix[i][j] + Math.min(findMin(matrix,i - 1,j - 1),Math.min(findMin(matrix,i - 1,j),findMin(matrix,i - 1,j + 1)))
-        return dp[i][j];
+        if(i > n || j < 0 || j >= n)return Infinity;
+        if(i === n - 1)return matrix[i][j];
+        if(dp[i][j] !== 666666)return dp[i][j]
+        dp[i][j] = matrix[i][j] + Math.min(findMin(matrix,i + 1 ,j + 1) ,Math.min(findMin(matrix,i + 1,j)) ,findMin(matrix,i + 1, j - 1) )
+        return dp[i][j] 
     }
-    let res = 9999999;
+    let res = 99999;
     for(let i = 0 ; i < n ; i++){
-        res = Math.min(res,findMin(matrix,n - 1,i))
+        res = Math.min(res,findMin(matrix,0,i));
     }
     return res;
 }
