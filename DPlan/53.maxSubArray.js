@@ -6,6 +6,7 @@
  * @return {number}
  */
 var maxSubArray = function(nums) {
+    // 动态规划迭代
     let n = nums.length;
     // let dp = new Array(n + 1).fill(0);
     // dp[0] = nums[0];
@@ -17,16 +18,12 @@ var maxSubArray = function(nums) {
     //     res = Math.max(res,dp[i]);
     // }
     // return res;
+    // 前缀和数组
     let preNum = new Array(n + 1);
     preNum[0] = 0;
     for(let i = 1 ; i <= n ; i++){
         preNum[i] = preNum[i - 1] + nums[i - 1];
     }
-    // let sum = 0;
-    // for(let i = 0 ; i <= n ; i++){
-    //     sum += nums[i];
-    //     preNum[i] = sum
-    // }
     let res = -Infinity;
     let minVal = Infinity;
     for(let i = 0 ; i < n ; i++){
