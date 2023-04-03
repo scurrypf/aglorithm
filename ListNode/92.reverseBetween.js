@@ -43,6 +43,26 @@ const reverse = function(head){
         cur = tmp;
     }
 }
+// 递归形式
+var reverseBetween = function(head, left, right) {
+    let backNode = null;
+    let reverse = function(head, n){
+        if(n === 1){
+            backNode = head.next;
+            return head;
+        }
+        let last = reverse(head, n - 1);
+        head.next.next = head;
+        head.next = backNode;
+        return last;
+    }
+    if(left === 1){
+        return reverse(head, right)
+    }
+    head.next = reverseBetween(head.next, left - 1, right - 1);
+    return head;
+}
+
 
 // 输入：head = [1,2,3,4,5], left = 2, right = 4
 // 输出：[1,4,3,2,5]
