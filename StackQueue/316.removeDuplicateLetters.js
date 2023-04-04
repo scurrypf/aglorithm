@@ -39,7 +39,7 @@ var removeDuplicateLetters = function(s) {
         stack.push(c);
         isHas.set(c,true);
     }
-    return stack.toString().split(',').join('');
+    return stack.join('');
 };
 
 const s = "cbacdcbc";
