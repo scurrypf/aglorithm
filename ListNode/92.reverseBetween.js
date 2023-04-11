@@ -51,7 +51,7 @@ var reverseBetween = function(head, left, right) {
             backNode = head.next;
             return head;
         }
-        let last = reverse(head, n - 1);
+        let last = reverse(head.next, n - 1);
         head.next.next = head;
         head.next = backNode;
         return last;
