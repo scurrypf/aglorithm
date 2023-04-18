@@ -4,8 +4,20 @@
  * @param {number[]} nums
  * @return {number}
  */
+// 注：本题将0转换为-1，然后直接求前缀和为0的长度
 var findMaxLength = function (nums) {
-
+    let preSum = 0,maxLen = 0;
+    let map = new Map();
+    map.set(0, -1)
+    for(let i = 0; i < nums.length; i++){
+        preSum += nums[i] === 0 ? -1 : 1;
+        if(map.has(preSum)){
+            maxLen = Math.max(maxLen,  i - map.get(preSum))
+        }else{
+            map.set(preSum, i)
+        }
+    }
+    return maxLen;
 }
 
 let nums = [0,1,0];
