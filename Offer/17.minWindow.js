@@ -9,7 +9,37 @@
  * @return {string}
  */
 var minWindow = function (s, t) {
-
+    let res = "", left = 0, right = 0, minLen = Infinity, n = 0, start = 0;
+    let window = new Map(), map = new Map();
+    for(let i = 0; i < t.length; i++){
+        let c = t.charAt(i);
+        if(map.has(c)){
+            map.set(c, map.get(c) + 1)
+        }else{
+            map.set(c, 1);
+        }
+    }
+    while(right < s.length){
+        let c = s.charAt(right);
+        right++;
+        if(window.has(c)){
+            window.set(c, window.get(c) + 1)
+        }else{
+            window.set(c, 1);
+        }
+        if(window.get(c) == map.get(c))n++;
+        while(map.size == n){
+            if(right - left < minLen){
+                minLen = right - left;
+                res = s.slice(left, left + minLen)
+            }
+            let d = s.charAt(left);
+            left++;
+            window.set(d, window.get(d) - 1);
+            if(map.get(d) > window.get(d))n--;
+        }
+    }
+    return res;
 }
 
 let s = "ADOBECODEBANC", t = "ABC";
