@@ -5,7 +5,24 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-
+    let window = new Map();
+    let maxLen = 0, left = 0, right = 0, start = 0;
+    while(right < s.length){
+        let c = s.charAt(right);
+        right++;
+        if(window.has(c)){
+            window.set(c, window.get(c) + 1);
+        }else{
+            window.set(c, 1);
+        }
+        while(window.get(c) > 1){
+            let d = s.charAt(left);
+            left++;
+            window.set(d, window.get(d) - 1);
+        }
+        maxLen = Math.max(maxLen, right - left)
+    }
+    return maxLen;
 }
 
 let s = "abcabcbb";
