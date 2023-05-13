@@ -6,7 +6,23 @@
  * @return {boolean}
  */
 var isPalindrome = function (s) {
-    
+    let ans = [];
+    for(let i = 0; i < s.length; i++){
+        let c = s.charAt(i);
+        // 正则判断字符再a-z，0-9，A-Z之间
+        if(/[a-z0-9A-Z]/.test(c)){
+            ans.push(c.toLocaleLowerCase())
+        }
+    }
+    let left = 0, right = ans.length - 1;
+    while(left < right){
+        if(ans[left] !== ans[right]){
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
 }
 
 let s = "A man, a plan, a canal: Panama";
