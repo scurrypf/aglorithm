@@ -5,7 +5,25 @@
  * @return {boolean}
  */
 var validPalindrome = function (s) {
-
+    let left = 0, right = s.length - 1;
+    let deletes = function(left, right){
+        while(left < right){
+            if(s[left] !== s[right]){
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+    while(left < right){
+        if(s[left] !== s[right]){
+            return deletes(left + 1, right) || deletes(left, right - 1);
+        }
+        left++;
+        right--;
+    }
+    return true;
 }
 
 const s = "abca";
