@@ -6,7 +6,21 @@
  * @return {number}
  */
 var countSubstrings = function(s) {
-
+    let count = 0;
+    let isPalind = function(s, left, right){
+        let count = 0;
+        while(left >= 0 && right < s.length && s[left] === s[right]){
+            count++;
+            left--;
+            right++;
+        }
+        return count;
+    }
+    for(let i = 0; i < s.length; i++){
+        count += isPalind(s, i, i);
+        count += isPalind(s, i, i + 1)
+    }
+    return count;
 }
 
 const s = "abc";
