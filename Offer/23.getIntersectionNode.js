@@ -9,7 +9,12 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
-
+    let l1 = headA, l2 = headB;
+    while(l1 !== l2){
+        l1 === null ? l1 = headB : l1 = l1.next;
+        l2 === null ? l2 = headA : l2 = l2.next;
+    }
+    return l1 === null ? null : l1;
 }
 
 
