@@ -10,11 +10,24 @@
  * @return {ListNode}
  */
 var detectCycle = function (head) {
-
+    let fast = head, slow = head;
+    while(fast !== null && fast.next !== null){
+        slow = slow.next;
+        fast = fast.next.next;
+        if(fast === slow){
+            slow = head;
+            while(slow !== fast){
+                slow = slow.next;
+                fast = fast.next;
+            }
+            return slow
+        }
+    }
+    return null; 
 }
 
 const head = [3,2,0,-4], pos = 1;
-console.log(detectCycle(head))
+console.log(detectCycle(head));
 // 输入：head = [3,2,0,-4], pos = 1
 // 输出：返回索引为 1 的链表节点
 // 解释：链表中有一个环，其尾部连接到第二个节点。
