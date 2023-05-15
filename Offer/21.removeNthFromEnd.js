@@ -6,7 +6,24 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-
+    let slow = head, fast = head, test = head, t = 0;
+    while(test !== null){
+        test = test.next;
+        t++;
+    }
+    if(t < n){
+        for(let i = 0; i < n + 1; i++){
+            fast = fast.next;
+        }
+        while(fast !== null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+    }else if(t == n){
+        head = head.next;
+    }
+    return head;
 }
 
 const head = [1,2,3,4,5], n = 2;
