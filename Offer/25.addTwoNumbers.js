@@ -8,7 +8,37 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    
+    let arr1 = [], arr2 = [];
+    while(l1 !== null){
+        arr1.push(l1.val);
+        l1 = l1.next;
+    }
+    while(l2 !== null){
+        arr2.push(l2.val);
+        l2 = l2.next;
+    }
+    let carry = 0;
+    let dummy = new ListNode(0);
+    dummy.next = l1;
+    while(arr1.length || arr2.length || carry > 0){
+        let count = carry;
+        if(arr1.length){
+            count += arr1.pop();
+        }
+        if(arr2.length){
+            count += arr2.pop();
+        }
+        if(count >= 10){
+            count = count % 10;
+            carry = 1;
+        }else{
+            carry = 0;
+        }
+        let node = new ListNode(count);
+        node.next = dummy.next;
+        dummy.next = node;
+    }
+    return dummy.next;
 }
 
 
