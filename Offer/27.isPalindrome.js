@@ -6,7 +6,29 @@
  * @return {boolean}
  */
 var isPalindrome = function (head) {
-
+    let reverse = function(head){
+        let pre = null, cur = head;
+        while(cur !== null){
+            let tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+        }
+        return pre;
+    }
+    let slow = head, fast = head;
+    while(fast !== null && fast.next !== null){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    let tmp = fast === null ? slow : slow.next;
+    let l1 = head, l2 = reverse(tmp);
+    while(l1 && l2){
+        if(l1.val !== l2.val)return false;
+        l1 = l1.next;
+        l2 = l2.next;
+    }
+    return true;
 }
 
 
