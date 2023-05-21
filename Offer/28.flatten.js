@@ -8,7 +8,30 @@
  * @return {Node}
  */
 var flatten = function (head) {
-
+    let flat = (head)=>{
+        let l1 = head;
+        let tail = null;
+        while(l1 !== null){
+            let next = l1.next;
+            if(l1.child){
+                let child = l1.child;
+                let childTail = flat(l1.child);
+                // 打平之后将child置为null
+                l1.child = null;
+                l1.next = child;
+                child.prev = l1;
+                childTail.next = next;
+                if(next)next.prev = childTail;
+                tail = childTail;
+            }else{
+                tail = l1;
+            }
+            l1 = next;
+        }
+        return tail;
+    }
+    flat(head);
+    return head;
 }
 
 
