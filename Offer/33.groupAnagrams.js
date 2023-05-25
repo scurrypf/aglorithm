@@ -6,7 +6,17 @@
  * @return {string[][]}
  */
 var groupAnagrams = function (strs) {
-
+    let map = new Map(), res = [];
+    for(let str of strs){
+        let arr = str.split('');
+        arr.sort();
+        let val = arr.join('')
+        map.has(val) ? map.get(val).push(str) : map.set(val, [str])
+    }
+    for(let val of map){
+        res.push(val[1])
+    }
+    return res;
 }
 
 const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
