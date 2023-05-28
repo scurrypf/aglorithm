@@ -5,7 +5,17 @@
  * @return {number}
  */
 var findMinDifference = function(timePoints) {
-
+    let min = Infinity;
+    let ans = timePoints.map((ele)=>{
+        let arr = ele.split(':').map((ele)=>parseInt(ele));
+        return arr[0] * 60 + arr[1];
+    })
+    ans.sort((a, b)=>a - b);
+    ans.push(ans[0] + 24 * 60);
+    for(let i = 1; i < ans.length; i++){
+        min = Math.min(ans[i] - ans[i - 1], min);
+    }
+    return min;
 }
 
 const timePoints = ["23:59","00:00"];
