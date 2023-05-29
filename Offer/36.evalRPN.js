@@ -9,7 +9,29 @@
  * @return {number}
  */
 var evalRPN = function (tokens) {
-
+    let res = [];
+    for(i = 0; i < tokens.length; i++){
+        if(tokens[i] === '+'){
+            let a = parseInt(res.pop());
+            let b = parseInt(res.pop());
+            res.push(b + a)
+        }else if(tokens[i] === '-'){
+            let a = parseInt(res.pop());
+            let b = parseInt(res.pop());
+            res.push(b - a)
+        }else if(tokens[i] === '*'){
+            let a = parseInt(res.pop());
+            let b = parseInt(res.pop());
+            res.push(b * a)
+        }else if(tokens[i] === '/'){
+            let a = parseInt(res.pop());
+            let b = parseInt(res.pop());
+            res.push(parseInt(b / a))
+        }else{
+            res.push(tokens[i]);
+        }
+    }
+    return res[0];
 }
 
 const tokens = ["2","1","+","3","*"];
