@@ -9,7 +9,25 @@
  * @return {number[]}
  */
 var asteroidCollision = function(asteroids) {
-
+    let res = [];
+    res.push(asteroids[0])
+    for(let i = 1; i < asteroids.length; i++){
+        let c = 1;
+        while(asteroids[i] * res[res.length - 1] < 0 && res[res.length - 1] > 0){
+            if(Math.abs(asteroids[i]) > Math.abs(res[res.length - 1])){
+                res.pop();
+            }else if(Math.abs(asteroids[i]) === Math.abs(res[res.length - 1])){
+                res.pop();
+                c = 0;
+                break;
+            }else{
+                c = 0;
+                break;
+            }
+        }
+        if(c !== 0)res.push(asteroids[i])
+    }
+    return res;
 }
 
 const asteroids = [5,10,-5];
