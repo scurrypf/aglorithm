@@ -6,7 +6,16 @@
  * @return {number[]}
  */
 var dailyTemperatures = function (temperatures) {
-
+    let ans = [], res = [];
+    for(let i = temperatures.length - 1; i >= 0; i--){
+        let c = temperatures[i];
+        while(ans.length !== 0 && temperatures[ans[ans.length - 1]] <= c){
+            ans.pop();
+        }
+        ans.length === 0 ? res.push(0) : res.unshift(ans[ans.length - 1] - i);
+        ans.push(i);
+    }
+    return res;
 }
 
 const temperatures = [73,74,75,71,69,72,76,73];
