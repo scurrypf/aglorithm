@@ -6,7 +6,22 @@
  * @return {number}
  */
 var largestRectangleArea = function (heights) {
-
+    let res = [], max = 0;
+    res.push(-1)
+    for(let i = 0; i < heights.length; i++){
+        while(res[res.length - 1] !== -1 && heights[i] < heights[res[res.length - 1]]){
+            let height = heights[res.pop()];
+            let width = i - res[res.length - 1] - 1;
+            max = Math.max(max, height * width);
+        }
+        res.push(i);
+    }
+    while(res[res.length - 1] !== -1){
+        let height = heights[res.pop()];
+        let width = heights.length - res[res.length - 1] - 1;
+        max = Math.max(max, height * width);
+    }
+    return max;
 }
 
 const heights = [2,1,5,6,2,3];
