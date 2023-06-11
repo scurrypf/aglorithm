@@ -6,7 +6,39 @@
  * @return {number}
  */
 var maximalRectangle = function (matrix) {
-
+    let transTo = function(heights){
+        let max = 0, stack = [];
+        stack.push(-1);
+        for(let i = 0; i < heights.length; i++){
+            let c = heights[i];
+            while(stack[stack.length - 1] !== -1 && heights[stack[stack.length - 1]] > c){
+                let height = heights[stack.pop()];
+                let width = i - stack[stack.length - 1] - 1;
+                max = Math.max(max, height * width);
+            }
+            stack.push(i);
+        }
+        while(stack[stack.length - 1] !== -1){
+            let height = heights[stack.pop()];
+            let width = heights.length - stack[stack.length - 1] - 1;
+            max = Math.max(max, height * width);
+        }
+        return max;
+    }
+    if(matrix.length === 0 || matrix[0].length === 0)return 0;
+    let heights = new Array(matrix[0].length).fill(0), max = 0;
+    let m = matrix.length, n = matrix[0].length;
+    for(let i = 0; i < m; i++){
+        for(let j = 0; j < n; j++){
+            if(matrix[i][j] === '0'){
+                heights[j] = 0;
+            }else{
+                heights[j]++;
+            }
+        }
+        max = Math.max(max, transTo(heights))
+    }
+    return max;
 }
 
 const matrix = ["10100","10111","11111","10010"];
