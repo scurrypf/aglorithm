@@ -18,7 +18,18 @@ var MovingAverage = function(size) {
  * @return {number}
  */
 MovingAverage.prototype.next = function(val) {
-
+    let sum = 0;
+    if(this.queue.length < this.maxLen){
+        this.queue.push(val);
+    }else{
+        // 注意这里从队首移除应该用shift()
+        this.queue.shift();
+        this.queue.push(val);
+    }
+    for(let i = 0; i < this.queue.length; i++){
+        sum += this.queue[i];
+    }
+    return sum / this.queue.length;
 };
 
 /**
