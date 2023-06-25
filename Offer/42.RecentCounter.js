@@ -6,7 +6,7 @@
 // 并返回过去 3000 毫秒内发生的所有请求数（包括新请求）。确切地说，返回在 [t-3000, t] 内发生的请求数。
 // 保证 每次对 ping 的调用都使用比之前更大的 t 值。
 var RecentCounter = function() {
-
+    this.queue = [];
 };
 
 /** 
@@ -14,7 +14,11 @@ var RecentCounter = function() {
  * @return {number}
  */
 RecentCounter.prototype.ping = function(t) {
-
+    this.queue.push(t);
+    while(this.queue[0] < t - 3000){
+        this.queue.shift();
+    }
+    return this.queue.length;
 };
 
 /**
