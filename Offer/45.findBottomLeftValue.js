@@ -6,7 +6,19 @@
  * @return {number}
  */
 var findBottomLeftValue = function(root) {
-
+    if(root === null)return null;
+    let res = [], queue = [];
+    queue.push(root);
+    while(queue.length !== 0){
+        let size = queue.length;
+        res.push(queue[0].val)
+        for(let i = 0; i < size; i++){
+            let node = queue.shift();
+            if(node.left !== null)queue.push(node.left);
+            if(node.right !== null)queue.push(node.right);
+        }
+    }
+    return res.pop();
 }
 
 
