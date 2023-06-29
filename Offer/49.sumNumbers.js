@@ -13,6 +13,7 @@ var sumNumbers = function(root) {
         if(root === null){
             return 0;
         }
+        // 乘10 + 节点值
         num = num * 10 + root.val;
         // 当叶子结点时返回值
         if(root.left === null && root.right === null){
