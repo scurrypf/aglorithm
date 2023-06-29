@@ -9,7 +9,19 @@
  * @return {number}
  */
 var sumNumbers = function(root) {
-
+    let dfs = function(root, num){
+        if(root === null){
+            return 0;
+        }
+        num = num * 10 + root.val;
+        // 当叶子结点时返回值
+        if(root.left === null && root.right === null){
+            return num;
+        }
+        // 对于root来说，要把两个子树的路径都加起来，而递归只在叶子节点时返回值
+        return dfs(root.left, num) + dfs(root.right, num);
+    }   
+    return dfs(root, num);
 };
 
 
