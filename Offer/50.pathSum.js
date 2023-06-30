@@ -8,7 +8,19 @@
  * @return {number}
  */
 var pathSum = function(root, targetSum) {
-
+    let res = 0;
+    let map = new Map();
+    let dfs = function(root, preSum){
+        if(root === null)return;
+        map.set(preSum, (map.get(preSum) || 0) + 1);
+        let target = preSum + root.val;
+        res += map.get(target - targetSum) || 0;
+        dfs(root.left, target);
+        dfs(root.right, target);
+        map.set(preSum, map.get(preSum) - 1);
+    }
+    dfs(root, 0);
+    return res;
 };
 
 
