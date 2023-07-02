@@ -8,8 +8,17 @@
  * @return {number}
  */
 var maxPathSum = function(root) {
-
-};
+    let max = -Infinity;
+    let dfs = function(root){
+        if(root === null)return 0;
+        let left = dfs(root.left);
+        let right = dfs(root.right);
+        max = Math.max(max, root.val + left + right);
+        return (Math.max(left, right) + root.val) < 0 ? 0 : (Math.max(left, right) + root.val);
+    }
+    dfs(root)
+    return max;
+};  
 
 
 
