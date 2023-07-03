@@ -6,7 +6,18 @@
  * @return {TreeNode}
  */
 var increasingBST = function(root) {
-
+    let dummy = new TreeNode(-1);
+    let Node = dummy;
+    let flat = function(root){
+        if(root === null)return;
+        flat(root.left);
+        Node.right = root;
+        root.left = null;
+        Node = root;
+        flat(root.right);
+    }
+    flat(root);
+    return dummy.right;
 };
 
 
