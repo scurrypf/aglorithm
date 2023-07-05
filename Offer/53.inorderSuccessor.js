@@ -7,7 +7,16 @@
  * @return {TreeNode}
  */
 var inorderSuccessor = function(root, p) {
-    
+    let res = null;
+    while(root !== null){
+        if(root.val > p.val){
+            res = root;
+            root = root.left;
+        }else{
+            root = root.right;
+        }
+    }
+    return res;
 };
 
 
