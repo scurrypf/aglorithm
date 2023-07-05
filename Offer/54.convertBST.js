@@ -10,7 +10,16 @@
  * @return {TreeNode}
  */
 var convertBST = function(root) {
-    
+    let sum = 0;
+    let inoder = function(root){
+        if(root === null)return;
+        inoder(root.right);
+        sum += root.val;
+        root.val = sum;
+        inoder(root.left);
+    }
+    inoder(root);
+    return root;
 };
 
 
