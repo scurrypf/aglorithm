@@ -7,7 +7,17 @@
  * @return {boolean}
  */
 var findTarget = function(root, k) {
-
+    let map = new Map();
+    let res = false;
+    let inorder = function(root){
+        if(root === null)return;
+        if(map.has(k - root.val))res = true;
+        map.set(root.val, 1);
+        inorder(root.left);
+        inorder(root.right);
+    }
+    inorder(root);
+    return res;
 };
 
 
