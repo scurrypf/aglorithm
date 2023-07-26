@@ -9,10 +9,25 @@
  * @return {boolean}
  */
 var containsNearbyAlmostDuplicate = function(nums, k, t) {
-
+    let map = new Map(), bucketSize = t + 1;
+    let getBucketId = (num, bucketSize) => {
+        return num > 0 ? Math.floor(num / bucketSize) : Math.floor((num + 1) / bucketSize) - 1;
+    }
+    for(let i = 0; i < nums.length; i++){
+        let id = getBucketId(nums[i], bucketSize);
+        if(map.has(id) || (map.has(id - 1) && map.get(id - 1) + t >= nums[i]) || (map.has(id + 1) && map.get(id + 1) - t <= nums[i])){
+            return true;
+        }
+        map.set(id, nums[i]);
+        if(i >= k){
+            map.delete(getBucketId(nums[i - k], bucketSize));
+        }
+    }
+    return false;
 };
 
-
+const nums = [1,2,3,1], k = 3, t = 0;
+console.log(containsNearbyAlmostDuplicate(nums, k, t))
 // 输入：nums = [1,2,3,1], k = 3, t = 0
 // 输出：true
 // 输入：nums = [1,0,1,1], k = 1, t = 2
