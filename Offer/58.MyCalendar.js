@@ -7,7 +7,7 @@
 // 否则，返回 false 并且不要将该日程安排添加到日历中。
 // 请按照以下步骤调用 MyCalendar 类: MyCalendar cal = new MyCalendar(); MyCalendar.book(start, end)。
 var MyCalendar = function() {
-
+    this.cal = [];
 };
 
 /** 
@@ -16,8 +16,28 @@ var MyCalendar = function() {
  * @return {boolean}
  */
 MyCalendar.prototype.book = function(start, end) {
-
+    let id = getIndex(start);
+    if((this.cal[id - 1] && start < this.cal[id - 1][1]) || (this.cal[id] && end > this.cal[id][0])){
+        return false;
+    }
+    this.cal.splice(id, 0, [start, end]);
+    return true;
 };
+// 取出start应该在的index
+MyCalendar.prototype.getIndex = function(start){
+    let left = 0, right = this.cal.length - 1;
+    while(left <= right){
+        let mid = Math.floor((left + right) / 2);
+        if(this.cal[mid][0] === start){
+            return mid;
+        }else if(this.cal[mid][0] > start){
+            right = mid - 1;
+        }else{
+            left = mid + 1;
+        }
+    }
+    return left;
+}
 
 /**
  * Your MyCalendar object will be instantiated and called as such:
