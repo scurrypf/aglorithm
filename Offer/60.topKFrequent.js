@@ -6,7 +6,17 @@
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-
+    let map = new Map();
+    for(let i = 0; i < nums.length; i++){
+        map.has(nums[i]) ? map.set(nums[i], map.get(nums[i]) + 1) : map.set(nums[i], 1);
+    }
+    let ans = Array.from(map);// 对map使用Array.from会得到一个二维数组
+    ans.sort((a, b) => b[1] - a[1]);
+    let res = [];
+    for(let i = 0; i < k; i++){
+        res.push(ans[i][0]);
+    }
+    return res;
 };
 
 const nums = [1,1,1,2,2,3], k = 2;
