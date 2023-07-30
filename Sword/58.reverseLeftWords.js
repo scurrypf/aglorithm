@@ -8,10 +8,23 @@
  * @return {string}
  */
 var reverseLeftWords = function(s, n) {
-
-};
+    // let res = [], ans = [];
+    // for(let i = 0; i < s.length; i++){
+    //     if(i < n){
+    //         ans.push(s[i]);
+    //     }else{
+    //         res.push(s[i]);
+    //     }
+    // }
+    // return res.join('') + ans.join('');
+    let res = s.split('');
+    for(let i = 0; i < n; i++){
+        res.push(s[i]);
+    }
+    return res.slice(n).join('');
+};  
 
 const s = "abcdefg", k = 2;
-console.log(reverseLeftWords(a, k));
+console.log(reverseLeftWords(s, k));
 // 输入: s = "abcdefg", k = 2
 // 输出: "cdefgab"
