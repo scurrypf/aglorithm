@@ -23,10 +23,26 @@
  * @return {boolean}
  */
 var isNumber = function(s) {
+    let numFlag = false, eFlag = false, dotFlag = false;
+    s = s.trim();
+    for(let i = 0; i < s.length; i++){
+        if(s[i] >= '0' && s[i] <= '9'){
+            numFlag = true;
+        }else if(s[i] === '.' && !eFlag && !dotFlag){
+            dotFlag = true;
+        }else if((s[i] === 'e' || s[i] === 'E') && !eFlag && numFlag){
+            eFlag = true;
+            numFlag = false; // 用于判断e后是否含有数字
+        }else if((s[i] === '+' || s[i] === '-') && (i === 0 || (eFlag && !numFlag))){
 
+        }else{
+            return false;
+        }
+    }
+    return numFlag;
 };
 
-const s = "    .1  ";
+const s = "e9";
 console.log(isNumber(s));
 // 输入：s = "    .1  "
 // 输出：true
