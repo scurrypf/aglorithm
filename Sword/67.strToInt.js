@@ -14,10 +14,31 @@
  * @return {number}
  */
 var strToInt = function(str) {
-
+    str = str.trim();
+    let n = 1, num = 0;
+    for(let i = 0; i < str.length; i++){
+        if(i === 0 && str[i] === '-'){
+            n = -1;
+            continue;
+        }else if(i === 0 && str[i] === '+'){
+            n = 1;
+            continue;
+        }
+        if((str[i] >= '0' && str[i] <= '9')){
+            num = num * 10 + parseInt(str[i]);
+            if(n * num < -2147483648){
+                return -2147483648;
+            }else if(n * num > 2147483647){
+                return 2147483647
+            }
+        }else{
+            break;
+        }
+    }
+    return n * num;
 }
 
-const str = "4193 with words";
+const str = "-91283472332";
 console.log(strToInt(str))
 // 输入: "42"
 // 输出: 42
