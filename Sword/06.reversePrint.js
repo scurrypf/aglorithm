@@ -12,7 +12,12 @@
  * @return {number[]}
  */
 var reversePrint = function(head) {
- 
+    let res = [];
+    while(head !== null){
+        res.unshift(head.val);
+        head = head.next;
+    }
+    return res;
 };
 
 const head = [1,3,2];
