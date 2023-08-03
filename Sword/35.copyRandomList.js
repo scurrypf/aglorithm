@@ -15,7 +15,22 @@
  * @return {Node}
  */
 var copyRandomList = function(head) {
-
+    if(head === null)return head;
+    for(let p = head; p !== null; p = p.next.next){
+        let nodeNew = new Node(p.val, p.next, null);
+        p.next = nodeNew;
+    }
+    for(let p = head; p !== null; p = p.next.next){
+        let nodeNew = p.next;
+        nodeNew.random = (p.random !== null) ? p.random.next : null;
+    }
+    let newHead = head.next;// 这里赋值为head.next，否则会返回原链表
+    for(let p = head; p !== null; p = p.next){
+        let nodeNew = p.next;
+        p.next = p.next.next;// 这里直接将p.next.next赋值给p.next，这样就可以直接迭代
+        nodeNew.next = (nodeNew.next !== null) ? nodeNew.next.next : null;
+    }
+    return newHead;
 }
 
 
