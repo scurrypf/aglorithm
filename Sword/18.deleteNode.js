@@ -15,7 +15,24 @@
  * @return {ListNode}
  */
 var deleteNode = function(head, val) {
-
+    let n = 0, pre = head;
+    while(pre !== null){
+        if(pre.val === val){
+            break;
+        }
+        n++;
+        pre = pre.next;
+    }
+    if(n !== 0){
+        let cur = head;
+        for(let i = 0; i < n - 1; i++){
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+    }else{
+        return head.next;
+    }
+    return head;
 }
 
 const head = [4,5,1,9], val = 5;
