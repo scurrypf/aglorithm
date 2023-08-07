@@ -6,10 +6,19 @@
  * @return {string}
  */
 var reverseWords = function(s) {
-
+    let ans = s.trim().split(' ');
+    let left = 0, right = ans.length - 1;
+    while(left <= right){
+        let p = ans[left];
+        ans[left] = ans[right];
+        ans[right] = p;
+        left++;
+        right--;
+    }
+    return ans.filter(ele => ele !== '').join(' ');
 };
 
-const s = "the sky is blue";
+const s = "a good   example";
 console.log(reverseWords(s));
 // 输入: "the sky is blue"
 // 输出: "blue is sky the"
