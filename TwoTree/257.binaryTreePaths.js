@@ -14,7 +14,22 @@
  * @return {string[]}
  */
 var binaryTreePaths = function(root) {
-
+    if(root === null)return [];
+    let res = [], ans = [];
+    let traverse = function(root){
+        if(root === null)return;
+        ans.push(root.val);
+        if(root.left === null && root.right === null){
+            res.push(ans.join('->'));
+            ans.pop();
+            return;
+        }
+        traverse(root.left);
+        traverse(root.right);
+        ans.pop();
+    }
+    traverse(root);
+    return res;
 };
 
 
