@@ -6,8 +6,38 @@
  * @return {number[]}
  */
 var maxSlidingWindow = function(nums, k) {
-
+    let res = [], ans = new newQueue();
+    for(let i = 0; i < nums.length; i++){
+        if(i < k - 1){
+            ans.push(nums[i]);
+        }else{
+            ans.push(nums[i]);
+            res.push(ans.getMax());
+            ans.pop(nums[i - k + 1]);
+        }
+    }
+    return res;
 };
+
+class newQueue{
+    constructor(){
+        this.queue = [];
+    }
+    push(val){
+        while(this.queue.length && val > this.queue[this.queue.length - 1]){
+            this.queue.pop();
+        }
+        this.queue.push(val);
+    }
+    getMax(){
+        return this.queue[0];
+    }
+    pop(val){
+        if(val === this.queue[0]){
+            this.queue.shift();
+        }
+    }
+}
 
 const nums = [1,3,-1,-3,5,3,6,7], k = 3;
 console.log(maxSlidingWindow(nums, k));
