@@ -5,7 +5,37 @@
  * @return {number[]}
  */
 var spiralOrder = function(matrix) {
-
+    let res = [];
+    let m = matrix.length, n = matrix[0].length;
+    let up = 0, bottom = m - 1;
+    let left = 0, right = n - 1;
+    while(res.length !== m * n){
+        if(up <= bottom){
+            for(let i = left; i <= right; i++){
+                res.push(matrix[up][i]);
+            }
+            up++;
+        }
+        if(left <= right){
+            for(let i = up; i <= bottom; i++){
+                res.push(matrix[i][right]);
+            }
+            right--;
+        }
+        if(up <= bottom){
+            for(let i = right; i >= left; i--){
+                res.push(matrix[bottom][i])
+            }
+            bottom--;
+        }
+        if(left <= right){
+            for(let i = bottom; i >= up; i--){
+                res.push(matrix[i][left])
+            }
+            left++;
+        }
+    }
+    return res;
 };
 
 const matrix = [[1,2,3],[4,5,6],[7,8,9]];
