@@ -7,17 +7,30 @@
  * @param {number} target
  * @return {boolean}
  */
-var findNumberIn2DArray = function(matrix, target) {
-
+var findNumberIn2DArray = function (matrix, target) {
+    if(matrix.length === 0)return false; 
+    let m = matrix.length, n = matrix[0].length;
+    let left = 0, right = n - 1;
+    while(left < m && right >= 0){
+      if(matrix[left][right] === target){
+        return true;
+      }else if(matrix[left][right] > target){
+        right--;
+      }else{
+        left++;
+      }
+    } 
+    return false;
 };
- 
+
 const matrix = [
-    [1,   4,  7, 11, 15],
-    [2,   5,  8, 12, 19],
-    [3,   6,  9, 16, 22],
+    [1, 4, 7, 11, 15],
+    [2, 5, 8, 12, 19],
+    [3, 6, 9, 16, 22],
     [10, 13, 14, 17, 24],
-    [18, 21, 23, 26, 30]
-  ], target = 5;
+    [18, 21, 23, 26, 30],
+  ],
+  target = 20;
 console.log(findNumberIn2DArray(matrix, target));
 // [
 //     [1,   4,  7, 11, 15],
