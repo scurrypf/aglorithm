@@ -7,7 +7,6 @@
 //  / \   / \
 // 1   3 6   9
 // 镜像输出：
-
 //      4
 //    /   \
 //   7     2
@@ -26,6 +25,11 @@
  */
 var mirrorTree = function(root) {
     if(root === null)return null;
+    let right = mirrorTree(root.left);
+    let left = mirrorTree(root.right);
+    root.right = right;
+    root.left = left;
+    return root;
 };
  
 
