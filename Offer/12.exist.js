@@ -9,7 +9,35 @@
  * @return {boolean}
  */
 var exist = function(board, word) {
-    
+    let m = board.length, n = board[0].length;
+    let search = function(i, j, k){
+        if(i < 0 || i >= m || j < 0 || j >= n || board[i][j] !== word[k]){
+            return false;
+        }
+        if(k === word.length - 1)return true;
+        let tmp = board[i][j];
+        board[i][j] = 0;
+        let flag = false;
+        let find = [[0, -1], [1, 0],[-1, 0], [0, 1]];
+        for(let cal of find){
+            x = i + cal[0];
+            y = j + cal[1];
+            flag = flag || search(x, y, k + 1);
+            if(flag){
+                break;
+            }
+        }
+        board[i][j] = tmp;
+        return flag;
+    }
+    for(let i = 0; i < m; i++){
+        for(let j = 0; j < n; j++){
+            if(search(i, j, 0)){
+                return true;
+            }
+        }
+    }
+    return false;
 };
 
 const board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED";
