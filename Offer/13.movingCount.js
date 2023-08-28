@@ -10,7 +10,27 @@
  * @return {number}
  */
 var movingCount = function(m, n, k) {
-
+    let res = 0;
+    let visited = new Array(m).fill(false).map(() => new Array(n).fill(false));
+    let DST = function(m, n, k, i, j, visited){
+        if(i < 0 || i >= m || j < 0 || j >= n){
+            return;
+        }
+        if(Math.floor(i / 10) + Math.floor(j / 10) + i % 10 + j % 10 > k){
+            return;
+        }
+        if(visited[i][j]){
+            return;
+        }
+        res++;
+        visited[i][j] = true;
+        DST(m, n, k, i + 1, j, visited);
+        DST(m, n, k, i, j + 1, visited);
+        DST(m, n, k, i - 1, j, visited);
+        DST(m, n, k, i, j - 1, visited);
+    }
+    DST(m, n, k, 0, 0, visited);
+    return res;
 };
  
 const m = 2, n = 3, k = 1;
