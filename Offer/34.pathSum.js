@@ -16,7 +16,21 @@
  * @return {number[][]}
  */
 var pathSum = function(root, target) {
-
+    let res = [], track = [];
+    let DFS = function(track, sum, root){
+        if(root === null)return;
+        track.push(root.val);
+        sum += root.val;
+        if(root.left === null && root.right === null && sum === target){
+            res.push(track.slice());
+        }
+        DFS(track, sum, root.left);
+        DFS(track, sum, root.right);
+        sum -= root.val;
+        track.pop();
+    }
+    DFS(track, 0, root);
+    return res;
 };
 
 
