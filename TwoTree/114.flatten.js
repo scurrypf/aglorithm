@@ -21,6 +21,20 @@ var flatten = function(root) {
         traverse(root.left);
         traverse(root.right);
     }
+    // const preoder = function(root){
+    //     if(root === null)return;
+    //     preoder(root.left);
+    //     preoder(root.right);
+    //     let left = root.left;
+    //     let right = root.right;
+    //     root.left = null;
+    //     root.right = left;
+    //     let p = root;
+    //     while(p.right !== null){
+    //         p = p.right;
+    //     }
+    //     p.right = right;
+    // }
     traverse(root);
     return root;
 }
